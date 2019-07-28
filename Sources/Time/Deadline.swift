@@ -49,7 +49,11 @@ extension Deadline: CustomStringConvertible {
 extension Deadline {
 	@inlinable
 	public static func - (lhs: Deadline, rhs: Deadline) -> Timeout {
-		return .nanoseconds(Timeout.Value(lhs.uptimeNanoseconds - rhs.uptimeNanoseconds))
+		if lhs >= rhs {
+			return .nanoseconds(Timeout.Value(lhs.uptimeNanoseconds - rhs.uptimeNanoseconds))
+		} else {
+			return .nanoseconds(-Timeout.Value(rhs.uptimeNanoseconds - lhs.uptimeNanoseconds))
+		}
 	}
 	
 	@inlinable
