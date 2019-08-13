@@ -2,7 +2,7 @@
 //  Timeout.swift
 //  Time
 //
-import Dispatch
+
 /// Represents a time interval in nanoseconds
 public struct Timeout: Equatable {
 	public typealias Value = Int64
