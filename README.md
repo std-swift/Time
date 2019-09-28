@@ -99,8 +99,6 @@ Represents a point in time relative to some fixed time in the past
 Supported operations:
 
 ```Swift
-var dispatchTime: DispatchTime
-
 static func - (lhs: Deadline, rhs: Deadline) -> Timeout
 static func + (lhs: Deadline, rhs: Timeout) -> Deadline
 static func - (lhs: Deadline, rhs: Timeout) -> Deadline

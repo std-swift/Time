@@ -3,14 +3,12 @@
 //  Time
 //
 
-import Dispatch
-
 /// Represents a point in time relative to some fixed time in the past
 public struct Deadline: Equatable, Hashable {
 	public typealias Value = UInt64
 	
 	public static let always = Deadline(0)
-	public static let never = Deadline(DispatchTime.distantFuture.uptimeNanoseconds)
+	public static let never = Deadline(.max)
 	
 	public let uptimeNanoseconds: Value
 	
@@ -19,16 +17,11 @@ public struct Deadline: Equatable, Hashable {
 	}
 	
 	public static func now() -> Deadline {
-		return Deadline(DispatchTime.now().uptimeNanoseconds)
+		return Deadline(Value(Clock.monotonic.now().view.nanoseconds))
 	}
 	
 	public static func uptimeNanoseconds(_ nanoseconds: Value) -> Deadline {
 		return Deadline(nanoseconds)
-	}
-	
-	@inlinable
-	public var dispatchTime: DispatchTime {
-		return DispatchTime(uptimeNanoseconds: self.uptimeNanoseconds)
 	}
 }
 
